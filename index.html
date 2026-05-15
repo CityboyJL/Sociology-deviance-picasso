@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Good Trouble — Picasso & the Sociology of Artistic Deviance</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Josefin+Sans:wght@300;400;600;700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=IM+Fell+English:ital@0;1&display=swap');
+
+:root {
+  --black:  #1a1008;
+  --cream:  #f5edd6;
+  --blue:   #1c3d6e;
+  --cobalt: #2255a4;
+  --red:    #c0392b;
+  --ochre:  #c8922a;
+  --yellow: #e8c84a;
+  --tan:    #c4a882;
+  --grey:   #7a7060;
+  --white:  #faf6ec;
+  --sp1:8px; --sp2:16px; --sp3:24px; --sp4:32px;
+  --sp5:40px; --sp6:48px; --sp8:64px; --sp10:80px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--white);color:var(--black);font-family:'Lora',serif;line-height:1.7;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size:200px 200px;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.15;}
+.josefin{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;letter-spacing:.12em;}
+
+/* ── ANIMATE ON SCROLL ── */
+.aos{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
+.aos.left{transform:translateX(-60px);}
+.aos.right{transform:translateX(60px);}
+.aos.scale{transform:scale(.95);}
+.aos.on{opacity:1!important;transform:none!important;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;width:100%;z-index:1000;
+  background:rgba(26,16,8,.92);backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--sp4);height:60px;border-bottom:1px solid rgba(200,146,42,.25);}
+.nav-brand{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.18em;color:var(--ochre);font-size:.68rem;font-weight:600;white-space:nowrap;}
+.nav-links{display:flex;gap:var(--sp4);align-items:center;}
+.nav-links a{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.1em;font-size:.63rem;color:var(--cream);position:relative;padding-bottom:2px;transition:color .2s;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;height:1px;width:0;
+  background:var(--yellow);transition:width .3s ease;}
+.nav-links a:hover{color:var(--yellow);}
+.nav-links a:hover::after{width:100%;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;
+  padding:4px;background:none;border:none;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--cream);transition:all .3s;}
+.mob-overlay{display:none;position:fixed;inset:0;background:var(--black);z-index:999;
+  flex-direction:column;align-items:center;justify-content:center;gap:var(--sp4);}
+.mob-overlay.open{display:flex;}
+.mob-overlay a{font-family:'Playfair Display',serif;font-size:2rem;color:var(--cream);font-style:italic;transition:color .2s;}
+.mob-overlay a:hover{color:var(--ochre);}
+.mob-close{position:absolute;top:20px;right:24px;font-size:2rem;color:var(--cream);
+  cursor:pointer;background:none;border:none;font-family:'Josefin Sans',sans-serif;}
+
+/* ── DIVIDER ── */
+.divider{width:100%;overflow:hidden;line-height:0;display:block;}
+.divider svg{display:block;width:100%;}
+.divider.flip{transform:scaleX(-1);}
+
+/* ── HERO ── */
+#hero{min-height:100vh;position:relative;overflow:hidden;background:var(--black);
+  display:flex;align-items:center;}
+.hero-shape{position:absolute;}
+.hs1{width:55%;height:110%;top:-5%;right:-5%;background:var(--blue);opacity:.7;
+  clip-path:polygon(25% 0%,100% 0%,100% 100%,10% 100%);}
+.hs2{width:40%;height:60%;top:0;left:10%;background:var(--red);opacity:.35;
+  clip-path:polygon(10% 0%,90% 0%,100% 100%,0% 85%);}
+.hs3{width:30%;height:40%;bottom:0;right:20%;background:var(--ochre);opacity:.4;
+  clip-path:polygon(0% 15%,100% 0%,90% 100%,10% 100%);}
+.hs4{width:20%;height:50%;top:20%;left:30%;background:var(--cobalt);opacity:.25;
+  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);}
+.hero-tri{position:absolute;top:10%;left:5%;width:0;height:0;
+  border-left:200px solid transparent;border-right:200px solid transparent;
+  border-bottom:350px solid var(--yellow);opacity:.12;pointer-events:none;}
+.hero-content{position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;
+  padding:100px var(--sp6) var(--sp8);display:grid;grid-template-columns:1fr auto;
+  align-items:center;gap:var(--sp8);}
+.hero-text{max-width:640px;}
+.hero-label{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.25em;font-size:.62rem;color:var(--ochre);margin-bottom:var(--sp3);}
+.hero-h1{font-size:clamp(56px,12vw,130px);font-style:italic;font-weight:900;
+  color:var(--cream);letter-spacing:-.02em;line-height:.9;margin-bottom:var(--sp3);}
+.hero-sub{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;letter-spacing:.15em;
+  font-size:clamp(.62rem,1.5vw,.82rem);color:var(--ochre);margin-bottom:var(--sp3);}
+.hero-hook{font-family:'IM Fell English',serif;font-style:italic;
+  font-size:clamp(1rem,2vw,1.2rem);color:rgba(245,237,214,.75);max-width:460px;line-height:1.6;}
+.hero-photo{width:clamp(160px,22vw,290px);border:6px solid var(--black);
+  outline:2px solid var(--ochre);outline-offset:-10px;transform:rotate(-3deg);
+  box-shadow:20px 20px 60px rgba(0,0,0,.6);filter:sepia(.25) contrast(1.1);
+  transition:transform .4s ease;}
+.hero-photo:hover{transform:rotate(0) scale(1.02);}
+.scroll-chev{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  color:var(--yellow);font-size:1.5rem;animation:bounce 2s infinite;cursor:pointer;z-index:3;}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(10px);}}
+
+/* ── COMMON SECTION ── */
+.sec{padding:var(--sp10) var(--sp6);}
+.sec-wrap{max-width:1280px;margin:0 auto;}
+.sec-label{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.25em;font-size:.63rem;color:var(--ochre);margin-bottom:var(--sp2);}
+.sec-title{font-size:clamp(1.8rem,5vw,3.2rem);font-style:italic;
+  margin-bottom:var(--sp5);color:var(--black);}
+.sec.dark{background:var(--black);color:var(--cream);}
+.sec.dark .sec-title,.sec.dark .sec-label{color:inherit;}
+.sec.dark .sec-label{color:var(--ochre);}
+
+/* ── BIOGRAPHY ── */
+.bio-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp8);align-items:start;}
+.bio-text p{margin-bottom:var(--sp3);font-size:1.02rem;}
+.bio-text strong{color:var(--black);}
+
+.facts-card{background:var(--cream);border:2px solid var(--black);
+  overflow:hidden;margin-top:var(--sp5);}
+.facts-card::before{content:'';display:block;height:5px;background:var(--ochre);}
+.facts-inner{padding:var(--sp4);}
+.facts-card h4{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.2em;font-size:.65rem;margin-bottom:var(--sp3);color:var(--grey);}
+.fact-row{display:flex;gap:var(--sp2);padding:8px 0;
+  border-bottom:1px solid rgba(26,16,8,.1);font-size:.88rem;}
+.fact-row:last-child{border:none;}
+.fact-k{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.1em;font-size:.6rem;color:var(--ochre);width:110px;flex-shrink:0;padding-top:2px;}
+
+/* CUBIST PORTRAIT */
+.cubist-portrait{position:relative;width:100%;max-width:360px;height:400px;margin:0 auto;}
+.cubist-portrait::after{content:'"Study in Fragments, 2024 (CSS)"';
+  position:absolute;bottom:-26px;left:0;right:0;text-align:center;
+  font-family:'Josefin Sans',sans-serif;font-size:.58rem;
+  text-transform:uppercase;letter-spacing:.15em;color:var(--grey);}
+.cp{position:absolute;}
+.cp1{width:160px;height:200px;background:var(--blue);opacity:.7;top:20px;left:60px;clip-path:polygon(20% 0%,80% 10%,100% 80%,10% 100%);}
+.cp2{width:100px;height:100px;background:var(--red);opacity:.6;top:40px;right:40px;border-radius:50%;}
+.cp3{width:140px;height:120px;background:var(--ochre);opacity:.5;bottom:80px;left:30px;clip-path:polygon(0 0,100% 20%,80% 100%,20% 90%);}
+.cp4{width:80px;height:180px;background:var(--cream);border:3px solid var(--black);top:60px;left:20px;clip-path:polygon(30% 0%,70% 0%,100% 100%,0% 100%);}
+.cp5{width:60px;height:60px;background:var(--yellow);opacity:.8;top:140px;right:60px;transform:rotate(45deg);}
+.cp6{width:120px;height:80px;background:var(--tan);opacity:.6;bottom:60px;right:30px;clip-path:polygon(10% 0%,90% 0%,100% 100%,0% 80%);}
+.cp7{width:40px;height:40px;background:transparent;border:3px solid var(--black);border-radius:50%;top:100px;left:100px;}
+.cp8{width:200px;height:2px;background:var(--black);top:200px;left:40px;transform:rotate(-15deg);}
+.cp9{width:50px;height:50px;background:var(--cobalt);opacity:.5;bottom:120px;left:140px;clip-path:polygon(50% 0%,100% 100%,0% 100%);}
+
+/* ── DEVIANCE ── */
+.exhibit-card{background:var(--cream);color:var(--black);border:1px solid var(--ochre);
+  padding:var(--sp4) var(--sp5);margin-bottom:var(--sp5);}
+.ex-label{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.2em;font-size:.6rem;color:var(--ochre);margin-bottom:var(--sp2);}
+.ex-quote{font-family:'IM Fell English',serif;font-style:italic;
+  font-size:clamp(.95rem,2vw,1.15rem);line-height:1.6;margin-bottom:var(--sp2);}
+.ex-attr{font-family:'Josefin Sans',sans-serif;font-size:.68rem;letter-spacing:.1em;color:var(--grey);}
+.dev-2col{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp5);}
+.dev-card{padding:var(--sp4);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));}
+.dev-card.formal{background:var(--cobalt);}
+.dev-card.informal{background:rgba(200,146,42,.15);border:1px solid var(--ochre);}
+.dev-card h3{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.15em;font-size:.72rem;color:var(--yellow);margin-bottom:var(--sp2);}
+.dev-card p{font-size:.92rem;line-height:1.6;color:var(--cream);}
+.dev-card.informal p{color:var(--cream);}
+.viols{list-style:none;margin-top:var(--sp4);}
+.viols li{display:flex;gap:var(--sp3);align-items:flex-start;padding:var(--sp2) 0;
+  border-bottom:1px solid rgba(245,237,214,.1);font-size:.95rem;}
+.vnum{width:30px;height:30px;border-radius:50%;background:var(--yellow);color:var(--black);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Josefin Sans',sans-serif;font-weight:700;font-size:.72rem;flex-shrink:0;margin-top:2px;}
+
+/* ── SCALD ── */
+.scald-intro{max-width:680px;margin-bottom:var(--sp8);font-size:1rem;line-height:1.75;}
+.scald-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--sp3);}
+.s-card{background:var(--black);color:var(--cream);padding:var(--sp4);cursor:pointer;
+  transition:transform .35s ease,box-shadow .35s ease;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%);}
+.s-card:nth-child(odd){transform:skewY(-2deg);}
+.s-card:nth-child(even){transform:skewY(2deg);}
+.s-card:hover{transform:none!important;box-shadow:0 20px 50px rgba(0,0,0,.4);}
+.s-letter{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;
+  color:var(--yellow);line-height:1;margin-bottom:4px;display:block;}
+.s-name{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.12em;font-size:.58rem;color:var(--ochre);margin-bottom:var(--sp2);display:block;}
+.s-text{font-size:.8rem;line-height:1.6;color:rgba(245,237,214,.82);}
+
+/* ── THEORIES SHARED ── */
+.theory-sec{padding:var(--sp10) var(--sp6);position:relative;}
+.theory-sec.light{background:var(--white);}
+.theory-sec.dark{background:var(--black);color:var(--cream);}
+.theory-sec.dark .sec-title{color:var(--cream);}
+.wmark{position:absolute;pointer-events:none;z-index:0;font-family:'Playfair Display',serif;
+  font-weight:900;opacity:.04;user-select:none;line-height:1;}
+.t-wrap{position:relative;max-width:1280px;margin:0 auto;}
+.t-card{padding:var(--sp4) var(--sp5);margin-bottom:var(--sp5);
+  border-left:5px solid var(--ochre);position:relative;z-index:1;}
+.t-card.light-bg{background:var(--cream);}
+.t-card.dark-bg{background:rgba(245,237,214,.06);}
+.t-placard{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.2em;font-size:.6rem;color:var(--ochre);margin-bottom:var(--sp2);}
+.t-card h3{font-style:italic;margin-bottom:var(--sp2);font-size:1.35rem;}
+.t-card p,.t-card li{font-size:.95rem;line-height:1.7;margin-bottom:6px;}
+.t-card ul{padding-left:var(--sp3);margin-top:var(--sp2);}
+.timeline{display:flex;gap:0;overflow-x:auto;margin:var(--sp5) 0;
+  padding-bottom:var(--sp2);position:relative;z-index:1;}
+.timeline::-webkit-scrollbar{height:3px;}
+.timeline::-webkit-scrollbar-thumb{background:var(--ochre);}
+.ts{flex:1;min-width:115px;padding:10px var(--sp2);text-align:center;position:relative;
+  font-family:'Josefin Sans',sans-serif;font-size:.58rem;
+  letter-spacing:.08em;text-transform:uppercase;font-weight:700;}
+.ts::after{content:'→';position:absolute;right:-8px;top:50%;transform:translateY(-50%);
+  color:var(--ochre);font-size:.9rem;z-index:2;}
+.ts:last-child::after{display:none;}
+.ts1{background:var(--cobalt);color:var(--white);}
+.ts2{background:var(--red);color:var(--white);}
+.ts3{background:var(--grey);color:var(--white);}
+.ts4{background:var(--blue);color:var(--white);}
+.ts5{background:var(--ochre);color:var(--black);}
+.ts6{background:var(--yellow);color:var(--black);}
+.phases{display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--sp3);
+  margin-bottom:var(--sp5);position:relative;z-index:1;}
+.ph{padding:var(--sp3);border-top:3px solid var(--ochre);}
+.theory-sec.light .ph{background:var(--cream);border:1px solid rgba(200,146,42,.3);border-top:3px solid var(--ochre);}
+.theory-sec.dark .ph{background:rgba(255,255,255,.04);}
+.ph-title{font-family:'Josefin Sans',sans-serif;font-size:.62rem;
+  text-transform:uppercase;letter-spacing:.15em;color:var(--ochre);margin-bottom:6px;}
+.ph p{font-size:.85rem;line-height:1.6;}
+.limits{background:rgba(192,57,43,.1);border-left:4px solid var(--red);
+  padding:var(--sp4) var(--sp5);position:relative;z-index:1;}
+.theory-sec.dark .limits{background:rgba(192,57,43,.15);}
+.limits h4{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.2em;font-size:.65rem;color:var(--red);margin-bottom:var(--sp2);}
+.limits ul{padding-left:var(--sp3);}
+.limits li{font-size:.88rem;line-height:1.65;margin-bottom:5px;}
+.theory-2col{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp5);
+  margin-bottom:var(--sp5);position:relative;z-index:1;}
+
+/* CONFLICT SPLIT */
+.conflict-split{display:grid;grid-template-columns:1fr 1fr;gap:0;
+  margin-bottom:var(--sp5);position:relative;z-index:1;}
+.conf-panel{padding:var(--sp5);}
+.conf-panel.estab{background:rgba(192,57,43,.15);border-right:3px solid var(--red);}
+.conf-panel.avant{background:rgba(34,85,164,.12);}
+.theory-sec.dark .conf-panel.avant{background:rgba(34,85,164,.22);}
+.conf-panel h3{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.15em;font-size:.68rem;margin-bottom:var(--sp3);}
+.conf-panel.estab h3{color:var(--red);}
+.conf-panel.avant h3{color:var(--cobalt);}
+.theory-sec.dark .conf-panel.avant h3{color:#7aabff;}
+.conf-panel ul{padding-left:var(--sp3);}
+.conf-panel li{font-size:.88rem;line-height:1.65;margin-bottom:7px;}
+.pyramid{margin:var(--sp5) 0;position:relative;z-index:1;}
+.pyr{display:flex;align-items:center;justify-content:center;
+  font-family:'Josefin Sans',sans-serif;font-size:.68rem;
+  text-transform:uppercase;letter-spacing:.1em;font-weight:600;
+  padding:var(--sp2);text-align:center;}
+.pyr.top{background:var(--grey);color:var(--white);width:60%;margin:0 auto;
+  clip-path:polygon(10% 0%,90% 0%,100% 100%,0% 100%);padding:var(--sp3) var(--sp5);}
+.pyr.mid{background:var(--cobalt);color:var(--white);width:80%;margin:2px auto;}
+.pyr.base{background:var(--ochre);color:var(--black);width:100%;}
+.pyr.base em{font-style:italic;font-family:'Lora',serif;font-size:.78rem;margin-left:8px;}
+
+/* ── ENHANCE ── */
+.enh-wmark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(15deg);
+  font-family:'Playfair Display',serif;font-size:clamp(80px,20vw,200px);font-weight:900;
+  color:var(--cream);opacity:.07;user-select:none;pointer-events:none;white-space:nowrap;z-index:0;}
+
+/* FULL-WIDTH SPECTRUM SLIDER */
+.spectrum-wrap{position:relative;z-index:1;width:100%;margin-bottom:var(--sp8);}
+.spectrum{width:100%;background:linear-gradient(to right,var(--red),var(--grey),var(--cobalt));
+  border-radius:40px;height:14px;margin-top:var(--sp2);position:relative;}
+.spec-labels{display:flex;justify-content:space-between;margin-top:10px;}
+.spec-l{font-family:'Josefin Sans',sans-serif;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;}
+.sl-left{color:var(--red);}
+.sl-mid{color:var(--grey);}
+.sl-right{color:var(--cobalt);}
+.spec-marker{position:absolute;right:4%;top:50%;transform:translateY(-50%);
+  width:24px;height:24px;border-radius:50%;background:var(--yellow);
+  border:3px solid var(--black);box-shadow:0 0 0 3px var(--yellow),0 4px 12px rgba(0,0,0,.3);}
+
+.args{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp5);
+  position:relative;z-index:1;margin-bottom:var(--sp5);}
+.arg{padding:var(--sp5);border-top:4px solid var(--ochre);background:var(--cream);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%);}
+.arg.wide{grid-column:1/-1;}
+.arg-claim{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.12em;font-size:.58rem;color:var(--ochre);margin-bottom:var(--sp2);display:block;}
+.arg h3{font-style:italic;font-size:1.2rem;margin-bottom:var(--sp3);}
+.arg p,.arg li{font-size:.95rem;line-height:1.7;margin-bottom:var(--sp1);}
+.arg ul{padding-left:var(--sp3);margin-top:var(--sp2);}
+.arg li{font-size:.9rem;line-height:1.6;margin-bottom:5px;}
+.conclusion{background:var(--black);color:var(--cream);padding:var(--sp6);
+  border-left:6px solid var(--ochre);position:relative;z-index:1;}
+.conclusion::before{content:'Conclusion';font-family:'Josefin Sans',sans-serif;
+  font-size:.58rem;letter-spacing:.3em;color:var(--ochre);display:block;margin-bottom:var(--sp3);}
+.conclusion p{font-size:.98rem;line-height:1.75;}
+.conclusion strong{color:var(--yellow);}
+
+/* ── GALLERY ── */
+.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp5);margin-top:var(--sp6);}
+.gal-frame{cursor:crosshair;transition:transform .4s ease,box-shadow .4s ease;}
+.gal-frame:hover{transform:scale(1.03);box-shadow:0 20px 60px rgba(0,0,0,.9);}
+.gal-img{width:100%;object-fit:contain;background:#111;
+  border:8px solid #2a2010;box-shadow:0 10px 40px rgba(0,0,0,.8);filter:sepia(.15);}
+.gal-placard{background:var(--black);padding:var(--sp3);border:1px solid rgba(200,146,42,.25);border-top:none;}
+.g-title{font-family:'IM Fell English',serif;font-style:italic;
+  color:var(--cream);margin-bottom:4px;font-size:.98rem;}
+.g-meta{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.1em;font-size:.58rem;color:var(--ochre);margin-bottom:8px;}
+.g-cap{font-family:'Lora',serif;font-style:italic;font-size:.8rem;
+  color:rgba(245,237,214,.7);line-height:1.55;}
+
+/* fallback placeholder blocks */
+.img-fallback{display:none;width:100%;background:var(--cobalt);
+  align-items:center;justify-content:center;flex-direction:column;
+  gap:8px;padding:var(--sp4);font-family:'Josefin Sans',sans-serif;
+  font-size:.6rem;color:var(--cream);text-transform:uppercase;
+  letter-spacing:.12em;text-align:center;}
+.img-fallback span.icon{font-size:2.5rem;opacity:.4;}
+
+/* ── REFLECTION ── */
+.ref-mark{position:absolute;top:30px;left:var(--sp5);font-family:'Playfair Display',serif;
+  font-size:200px;font-weight:900;color:var(--ochre);opacity:.16;line-height:1;
+  pointer-events:none;user-select:none;z-index:0;}
+.ref-quote{font-family:'IM Fell English',serif;font-style:italic;
+  font-size:clamp(1.3rem,3.5vw,2.1rem);color:var(--black);line-height:1.4;
+  max-width:680px;margin:0 auto var(--sp2);text-align:center;position:relative;z-index:1;}
+.ref-attr{font-family:'Josefin Sans',sans-serif;font-size:.68rem;text-transform:uppercase;
+  letter-spacing:.2em;color:var(--ochre);text-align:center;
+  margin-bottom:var(--sp8);position:relative;z-index:1;}
+.ref-body{max-width:780px;margin:0 auto;position:relative;z-index:1;}
+.ref-body p{font-size:1rem;line-height:1.8;margin-bottom:var(--sp4);}
+.ref-body strong{font-weight:700;}
+.wall-card{background:var(--cream);border-left:6px solid var(--ochre);padding:var(--sp5) var(--sp6);}
+.wall-card p{font-family:'Lora',serif;font-size:.98rem;line-height:1.75;}
+
+/* ── REFERENCES ── */
+.ref-geo{display:flex;gap:8px;margin-bottom:var(--sp5);}
+.rr{height:22px;width:55px;}
+.rr1{background:var(--cobalt);}
+.rr2{background:var(--red);}
+.rr3{background:var(--ochre);}
+.ref-ed{font-family:'Josefin Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.2em;font-size:.62rem;color:var(--grey);margin-bottom:var(--sp4);display:block;}
+.ref-list{list-style:none;max-width:900px;}
+.ref-list li{font-family:'Lora',serif;font-size:.92rem;line-height:1.7;
+  padding-left:2em;text-indent:-2em;margin-bottom:var(--sp3);
+  padding-bottom:var(--sp3);border-bottom:1px solid rgba(26,16,8,.1);}
+.ref-list li:last-child{border:none;}
+.ref-list em{font-style:italic;}
+.ref-list a{color:var(--cobalt);text-decoration:underline;word-break:break-all;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .scald-grid{grid-template-columns:repeat(3,1fr);}
+  .phases{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .hero-content{grid-template-columns:1fr;gap:var(--sp4);padding-top:80px;}
+  .hero-photo{margin:0 auto;}
+  .bio-grid,.dev-2col,.conflict-split,.args,.theory-2col,.gal-grid{grid-template-columns:1fr;}
+  .scald-grid{grid-template-columns:1fr 1fr;}
+  .phases{grid-template-columns:1fr;}
+  .arg.wide{grid-column:1;}
+}
+@media(max-width:480px){
+  .scald-grid{grid-template-columns:1fr;}
+}
+@media print{
+  body::after,.scroll-chev,nav{display:none!important;}
+  body{background:#fff!important;color:#000!important;}
+  *{animation:none!important;transition:none!important;}
+  .aos{opacity:1!important;transform:none!important;}
+  #hero{background:#eee!important;min-height:auto;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">Picasso ∙ Deviance ∙ Society</span>
+  <div class="nav-links">
+    <a href="#hero">Home</a>
+    <a href="#biography">Biography</a>
+    <a href="#deviance">Deviance</a>
+    <a href="#scald">S.C.A.L.D.</a>
+    <a href="#labelling">Theories</a>
+    <a href="#enhance">Enhance?</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#references">References</a>
+  </div>
+  <button class="hamburger" id="hbg" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mob-overlay" id="mobNav">
+  <button class="mob-close" id="mobClose">✕</button>
+  <a href="#hero"        onclick="document.getElementById('mobNav').classList.remove('open')">Home</a>
+  <a href="#biography"  onclick="document.getElementById('mobNav').classList.remove('open')">Biography</a>
+  <a href="#deviance"   onclick="document.getElementById('mobNav').classList.remove('open')">Deviance</a>
+  <a href="#scald"      onclick="document.getElementById('mobNav').classList.remove('open')">S.C.A.L.D.</a>
+  <a href="#labelling"  onclick="document.getElementById('mobNav').classList.remove('open')">Theories</a>
+  <a href="#enhance"    onclick="document.getElementById('mobNav').classList.remove('open')">Enhance?</a>
+  <a href="#gallery"    onclick="document.getElementById('mobNav').classList.remove('open')">Gallery</a>
+  <a href="#references" onclick="document.getElementById('mobNav').classList.remove('open')">References</a>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="hero-shape hs1"></div>
+  <div class="hero-shape hs2"></div>
+  <div class="hero-shape hs3"></div>
+  <div class="hero-shape hs4"></div>
+  <div class="hero-tri"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <p class="hero-label josefin">Sociology Case Study — Deviance &amp; Society</p>
+      <h1 class="hero-h1">Good<br>Trouble</h1>
+      <p class="hero-sub josefin">Pablo Picasso &amp; the Sociology of Artistic Deviance</p>
+      <p class="hero-hook">"He shattered every rule of art — and rewrote the rules of human perception."</p>
+    </div>
+    <div>
+      <img id="img-picasso"
+           class="hero-photo"
+           src="https://cdn.britannica.com/63/59963-050-C03F29B9/Pablo-Picasso.jpg"
+           alt="Pablo Picasso, c. 1908">
+      <div id="fb-picasso" class="img-fallback" style="aspect-ratio:3/4;width:clamp(160px,22vw,290px);border:6px solid var(--black);outline:2px solid var(--ochre);outline-offset:-10px;box-shadow:20px 20px 60px rgba(0,0,0,.6);">
+        <span class="icon">◈</span><span>Pablo Picasso</span><span style="opacity:.6">c. 1908</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-chev" onclick="document.getElementById('biography').scrollIntoView({behavior:'smooth'})">↓</div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C150,5 300,35 450,18 C600,2 750,38 900,20 C1050,4 1150,30 1200,20 L1200,40 L0,40 Z" fill="#c8922a" opacity="0.6"/>
+    <path d="M0,25 C200,10 350,40 500,22 C650,6 800,35 950,18 C1100,3 1160,28 1200,22 L1200,40 L0,40 Z" fill="#c8922a" opacity="0.3"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ BIOGRAPHY ═══════════════ -->
+<section id="biography" class="sec">
+  <div class="sec-wrap">
+    <p class="sec-label josefin aos">Section I</p>
+    <h2 class="sec-title aos">The Man Behind the Revolution</h2>
+    <div class="bio-grid">
+      <div class="bio-text">
+        <p class="aos">Born <strong>October 25, 1881</strong> in Málaga, Spain, Pablo Picasso showed extraordinary talent before adolescence — by 13 his skill had surpassed his father's, a drawing teacher. He briefly attended the Royal Academy in Madrid before abandoning formal training to chart his own path.</p>
+        <p class="aos">Arriving in Paris in 1900, he passed through the melancholic <strong>Blue Period (1901–04)</strong> and the humanistic <strong>Rose Period (1904–06)</strong>. Then came the earthquake: in 1907 he produced <em>Les Demoiselles d'Avignon</em>, so radical it horrified even close allies. With Georges Braque, Picasso invented <strong>Cubism</strong> — abandoning single-point perspective, fragmenting form into geometric planes, showing multiple viewpoints simultaneously.</p>
+        <p class="aos">Over seven decades, he produced an estimated <strong>20,000 works</strong>. He died <strong>April 8, 1973</strong> — universally acknowledged as the most influential artist of the twentieth century.</p>
+        <div class="facts-card aos">
+          <div class="facts-inner">
+            <h4 class="josefin">Fast Facts</h4>
+            <div class="fact-row"><span class="fact-k josefin">Born</span><span>Oct 25, 1881 — Málaga, Spain</span></div>
+            <div class="fact-row"><span class="fact-k josefin">Died</span><span>Apr 8, 1973 — Mougins, France</span></div>
+            <div class="fact-row"><span class="fact-k josefin">Known For</span><span>Cubism, <em>Les Demoiselles</em>, <em>Guernica</em></span></div>
+            <div class="fact-row"><span class="fact-k josefin">Periods</span><span>Blue · Rose · Cubism · Neoclassicism · Surrealism</span></div>
+            <div class="fact-row"><span class="fact-k josefin">Output</span><span>~20,000 works across all media</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Study in Fragments — actual Picasso photo -->
+      <div class="aos" style="display:flex;flex-direction:column;align-items:center;">
+        <img src="https://urbakiart.com/wp-content/uploads/2023/01/pablo-picasso-1-768x512.jpg"
+             alt="Pablo Picasso"
+             style="width:100%;max-width:360px;border:6px solid var(--black);outline:2px solid var(--ochre);outline-offset:-10px;filter:sepia(.2) contrast(1.1);box-shadow:12px 12px 40px rgba(0,0,0,.4);">
+        <p style="font-family:'Josefin Sans',sans-serif;font-size:.58rem;text-transform:uppercase;letter-spacing:.15em;color:var(--grey);margin-top:10px;">Pablo Picasso at work in his studio</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider flip">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C150,5 300,35 450,18 C600,2 750,38 900,20 C1050,4 1150,30 1200,20 L1200,40 L0,40 Z" fill="#c8922a" opacity="0.5"/>
+    <path d="M0,28 C180,12 360,40 540,20 C720,4 900,38 1080,18 C1140,10 1180,30 1200,24 L1200,40 L0,40 Z" fill="#1c3d6e" opacity="0.3"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ DEVIANCE ═══════════════ -->
+<section id="deviance" class="sec dark">
+  <div class="sec-wrap">
+    <p class="sec-label josefin aos">Section II</p>
+    <h2 class="sec-title aos">Picasso as a Deviant</h2>
+
+    <div class="exhibit-card aos">
+      <p class="ex-label josefin">Exhibit A</p>
+      <p class="ex-quote">"Deviance is not a property inherent in any particular kind of behavior; it is a property conferred upon that behavior by the people who come into contact with it."</p>
+      <p class="ex-attr josefin">— Howard Becker, <em>Outsiders</em> (1963)</p>
+    </div>
+
+    <div class="dev-2col aos" style="margin-bottom:var(--sp5);">
+      <div class="dev-card formal">
+        <h3>Formal Deviance</h3>
+        <p>Violation of codified laws — the domain of criminal justice.</p>
+      </div>
+      <div class="dev-card informal">
+        <h3>Informal Deviance</h3>
+        <p>Violation of social norms not encoded in law — enforced through exclusion and stigma. <em>Picasso's territory.</em></p>
+      </div>
+    </div>
+
+    <p class="aos" style="font-size:1rem;line-height:1.75;margin-bottom:var(--sp4);">Deviance is <strong style="color:var(--ochre)">relative</strong> — it varies by culture, time, and who is judging. Picasso's violations of the European academic art world were conscious, deliberate, and sustained:</p>
+
+    <ul class="viols aos">
+      <li><span class="vnum">1</span><span>Rejected single-point perspective — the visual foundation of Western art since the Renaissance.</span></li>
+      <li><span class="vnum">2</span><span>Depicted multiple simultaneous viewpoints on one canvas, fragmenting the human figure.</span></li>
+      <li><span class="vnum">3</span><span>Incorporated African &amp; Iberian forms dismissed by Europeans as "primitive" contamination.</span></li>
+      <li><span class="vnum">4</span><span>Abandoned beauty — replacing idealization with psychological rawness.</span></li>
+      <li><span class="vnum">5</span><span><em>Les Demoiselles d'Avignon</em> (1907) was condemned as "ugly," "barbaric," and "an assault on decency" — even Braque was horrified.</span></li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C150,5 300,35 450,18 C600,2 750,38 900,20 C1050,4 1150,30 1200,20 L1200,40 L0,40 Z" fill="#c8922a" opacity="0.55"/>
+    <path d="M0,25 C200,10 350,40 500,22 C650,6 800,35 950,18 C1100,3 1160,28 1200,22 L1200,40 L0,40 Z" fill="#1a1008" opacity="0.4"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ SCALD ═══════════════ -->
+<section id="scald" class="sec">
+  <div class="sec-wrap">
+    <p class="sec-label josefin aos">Section III</p>
+    <h2 class="sec-title aos">S.C.A.L.D. Analysis</h2>
+    <p class="scald-intro aos">SCALD is a sociological framework for determining whether behaviour qualifies as deviant. It examines five dimensions: the actor's <strong>Social Status</strong>, the <strong>Culture</strong> of the act, the actor's <strong>Age</strong>, the <strong>Location</strong>, and the <strong>Degree</strong> of deviation from established norms.</p>
+    <div class="scald-grid">
+      <div class="s-card aos" style="transition-delay:0s">
+        <span class="s-letter">S</span>
+        <span class="s-name josefin">Social Status</span>
+        <p class="s-text">A foreign-born outsider with no backing from the Paris Salon. His low institutional status made his norm violations read as presumptuous — the same work from an established figure might have been tolerated.</p>
+      </div>
+      <div class="s-card aos" style="transition-delay:.1s">
+        <span class="s-letter">C</span>
+        <span class="s-name josefin">Culture</span>
+        <p class="s-text">European art culture demanded beauty, symmetry, and ideal representation. Picasso's deliberate ugliness and appropriation of African forms violated every deeply embedded cultural expectation.</p>
+      </div>
+      <div class="s-card aos" style="transition-delay:.2s">
+        <span class="s-letter">A</span>
+        <span class="s-name josefin">Age</span>
+        <p class="s-text">He dismantled tradition in his mid-twenties — when artists were expected to be learning, not revolting. Youth made his violations appear arrogant rather than earned experimentation.</p>
+      </div>
+      <div class="s-card aos" style="transition-delay:.3s">
+        <span class="s-letter">L</span>
+        <span class="s-name josefin">Location</span>
+        <p class="s-text">Paris: the global capital of fine art, home to the world's most powerful gatekeepers. The prestige of this location transformed local deviance into an international cultural rupture.</p>
+      </div>
+      <div class="s-card aos" style="transition-delay:.4s">
+        <span class="s-letter">D</span>
+        <span class="s-name josefin">Degree</span>
+        <p class="s-text">He didn't nudge boundaries — he annihilated them. Faces from three angles simultaneously; bodies as pure geometry. Categorical rupture, not gentle experimentation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider flip">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C150,5 300,35 450,18 C600,2 750,38 900,20 C1050,4 1150,30 1200,20 L1200,40 L0,40 Z" fill="#c8922a" opacity="0.5"/>
+    <path d="M0,25 C200,10 350,40 500,22 C650,6 800,35 950,18 C1100,3 1160,28 1200,22 L1200,40 L0,40 Z" fill="#c8922a" opacity="0.25"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ LABELLING ═══════════════ -->
+<section id="labelling" class="theory-sec light">
+  <div class="wmark" style="font-size:30vw;top:5%;left:-3%;color:var(--cobalt);">I</div>
+  <div class="t-wrap">
+    <p class="sec-label josefin aos">Section IV — Theory I</p>
+    <h2 class="sec-title aos">Labelling Theory</h2>
+
+    <div class="t-card light-bg aos">
+      <p class="t-placard josefin">Definition</p>
+      <h3>Becker (1963) &amp; Lemert (1951)</h3>
+      <p>Deviance is <strong>not inherent in an act</strong> — it is socially constructed through <em>reaction</em>. Powerful groups define what is deviant, apply labels, and those labels reshape identity and social treatment over time.</p>
+      <ul>
+        <li><strong>Primary deviance:</strong> the initial norm-violating act</li>
+        <li><strong>Secondary deviance:</strong> further deviance from internalising the label</li>
+        <li><strong>Moral entrepreneurs:</strong> groups who actively enforce social norms</li>
+      </ul>
+    </div>
+
+    <div class="timeline aos">
+      <div class="ts ts1">Cubism<br>Created</div>
+      <div class="ts ts2">"Bizarre"<br>Label Applied</div>
+      <div class="ts ts3">Institutional<br>Rejection</div>
+      <div class="ts ts4">Counter-<br>Community</div>
+      <div class="ts ts5">Label<br>Contested</div>
+      <div class="ts ts6">Re-labelled<br>"Genius"</div>
+    </div>
+
+    <div class="phases">
+      <div class="ph aos">
+        <p class="ph-title josefin">Phase 1 — Label Applied (1907–12)</p>
+        <p>Critic Louis Vauxcelles coined "Cubism" as an insult in 1908. The mainstream applied labels of "bizarre," "ugly," and "incomprehensible." Even Braque compared seeing <em>Les Demoiselles</em> to drinking gasoline.</p>
+      </div>
+      <div class="ph aos">
+        <p class="ph-title josefin">Phase 2 — Resistance (1912–20)</p>
+        <p>Picasso persisted, shielded by a counter-community: dealers Kahnweiler and Vollard, collectors the Steins, and avant-garde artists who applied counter-labels of "visionary" and "revolutionary."</p>
+      </div>
+      <div class="ph aos">
+        <p class="ph-title josefin">Phase 3 — Label Reversal (1920s–)</p>
+        <p>Institutions that once rejected Cubism competed to acquire it. The original deviant label had fully inverted — becoming evidence of extraordinary genius.</p>
+      </div>
+    </div>
+
+    <div class="limits aos">
+      <h4 class="josefin">⚠ Limitations</h4>
+      <ul>
+        <li>Cannot explain <em>why</em> Picasso chose to violate norms — it describes reaction, not creative origin.</li>
+        <li>Ignores internal motivations: Cézanne, African masks, the intellectual partnership with Braque.</li>
+        <li>Treats the deviant as passive — but Picasso actively transformed his labels rather than simply receiving them.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C150,5 300,35 450,18 C600,2 750,38 900,20 C1050,4 1150,30 1200,20 L1200,40 L0,40 Z" fill="#c8922a" opacity="0.55"/>
+    <path d="M0,30 C200,15 400,38 600,22 C800,6 1000,38 1200,20 L1200,40 L0,40 Z" fill="#1a1008" opacity="0.45"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ CONFLICT ═══════════════ -->
+<section id="conflict" class="theory-sec dark">
+  <div class="wmark" style="font-size:30vw;top:5%;right:-3%;color:var(--white);">II</div>
+  <div class="t-wrap">
+    <p class="sec-label josefin aos">Section V — Theory II</p>
+    <h2 class="sec-title aos">Conflict Theory</h2>
+
+    <div class="theory-2col">
+      <div class="t-card dark-bg aos left">
+        <p class="t-placard josefin">Definition</p>
+        <h3>Marx; Quinney (1970)</h3>
+        <p>Deviance is <strong>produced by power structures</strong>. Dominant groups define norms to serve their own interests and label as "deviant" those who challenge their authority. Deviance becomes a struggle over who controls cultural meaning and legitimacy.</p>
+      </div>
+      <div class="aos right">
+        <div class="pyramid">
+          <div class="pyr top">Paris Salon / Academic Institutions</div>
+          <div class="pyr mid">Established Artists &amp; Critics</div>
+          <div class="pyr base">Emerging Artists / Outsiders <em>← Picasso's entry point</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="conflict-split aos">
+      <div class="conf-panel estab">
+        <h3 class="josefin">The Art Establishment</h3>
+        <ul>
+          <li>Paris Salon controlled exhibition access &amp; commercial viability</li>
+          <li>École des Beaux-Arts enforced technical standards</li>
+          <li>Wealthy patrons held power to validate or destroy careers</li>
+          <li>Classified non-Western influence as "primitive" contamination</li>
+        </ul>
+      </div>
+      <div class="conf-panel avant">
+        <h3 class="josefin">The Avant-Garde Challenge</h3>
+        <ul>
+          <li>Cubism declared Renaissance perspective a <em>cultural choice</em>, not truth</li>
+          <li>African &amp; Iberian forms challenged Eurocentric hierarchies</li>
+          <li>Alternative economic infrastructure via Kahnweiler &amp; Vollard</li>
+          <li><em>Guernica</em> (1937) made political resistance explicit — art as weapon</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="limits aos" style="margin-top:var(--sp4);">
+      <h4 class="josefin">⚠ Limitations</h4>
+      <ul>
+        <li>Over-emphasises structural forces; under-explains individual creative agency and aesthetic curiosity.</li>
+        <li>Cannot explain why Picasso specifically — not other equally marginalised outsiders — invented Cubism.</li>
+        <li>Frames deviance as political and economic, but significant dimensions were <em>aesthetic and philosophical</em>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider flip">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C150,5 300,35 450,18 C600,2 750,38 900,20 C1050,4 1150,30 1200,20 L1200,40 L0,40 Z" fill="#c8922a" opacity="0.5"/>
+    <path d="M0,25 C200,10 350,40 500,22 C650,6 800,35 950,18 C1100,3 1160,28 1200,22 L1200,40 L0,40 Z" fill="#c8922a" opacity="0.25"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ ENHANCE ═══════════════ -->
+<section id="enhance" class="sec" style="position:relative;overflow:hidden;">
+  <div class="enh-wmark">ENHANCE?</div>
+  <div class="sec-wrap">
+    <p class="sec-label josefin aos">Section VI — Central Argument</p>
+    <h2 class="sec-title aos">To What Extent Does Deviant Behaviour Enhance Society?</h2>
+
+    <!-- FULL-WIDTH SPECTRUM -->
+    <div class="spectrum-wrap aos">
+      <div class="spectrum">
+        <div class="spec-marker"></div>
+      </div>
+      <div class="spec-labels">
+        <span class="spec-l sl-left">Destructive</span>
+        <span class="spec-l sl-mid">Neutral</span>
+        <span class="spec-l sl-right">Transformative ← Picasso</span>
+      </div>
+    </div>
+
+    <div class="args">
+      <div class="arg aos left">
+        <span class="arg-claim josefin">Argument I</span>
+        <h3>Deviance as Cultural Engine</h3>
+        <p>Durkheim argued deviance performs a <strong>boundary-revising function</strong> — forcing society to examine norms that have calcified into dogma. Picasso didn't just violate single-point perspective; he proved its arbitrariness. The downstream cascade:</p>
+        <ul>
+          <li><strong>Abstract Expressionism</strong> — Kandinsky, Mondrian, de Kooning built directly on Cubist foundations</li>
+          <li><strong>Architecture</strong> — Le Corbusier credited Cubism with reshaping spatial thinking</li>
+          <li><strong>Film theory</strong> — Eisenstein's montage is structurally analogous to Cubist simultaneity</li>
+          <li><strong>Digital visual culture</strong> — layered, multi-perspective design traces back to Cubism</li>
+        </ul>
+      </div>
+      <div class="arg aos right">
+        <span class="arg-claim josefin">Argument II</span>
+        <h3>Context Is Everything</h3>
+        <p>Enhancement is not guaranteed — it depends on <em>who commits deviance, when, and with what support.</em> Picasso benefited from:</p>
+        <ul>
+          <li>Paris's dense avant-garde network</li>
+          <li>Non-violent, victimless deviance</li>
+          <li>Alternative economic infrastructure</li>
+          <li>A society already questioning 19th-century certainties</li>
+        </ul>
+        <p><strong>Qualified conclusion:</strong> the potential for enhancement is realised only when deviance challenges genuinely limiting norms and is channelled into generative output.</p>
+      </div>
+      <div class="arg wide aos">
+        <span class="arg-claim josefin">Argument III</span>
+        <h3>The Cost of Conformity</h3>
+        <p>Had institutional suppression successfully silenced Cubism, the 20th century would have been immeasurably impoverished. History's greatest advances — the Renaissance, the Enlightenment, the Modernist revolution — were all, in their moment, <strong>acts of deviance against the dominant order</strong>. Absolute conformity doesn't just fail to enhance society; it reliably impoverishes it.</p>
+      </div>
+    </div>
+
+    <div class="conclusion aos">
+      <p>Picasso's case shows that deviant behaviour enhances society to a <strong>significant extent</strong> when three conditions align: the norms being violated are arbitrary constraints rather than genuine protections; the deviant has both the vision and social resources to outlast the backlash; and the deviance is channelled into <strong>creation rather than destruction</strong>. Deviance is a social mechanism — in Picasso's hands, it proved one of the most transformative forces of the modern age.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C150,5 300,35 450,18 C600,2 750,38 900,20 C1050,4 1150,30 1200,20 L1200,40 L0,40 Z" fill="#1a1008" opacity="0.6"/>
+    <path d="M0,28 C200,12 400,40 600,22 C800,6 1000,38 1200,18 L1200,40 L0,40 Z" fill="#c8922a" opacity="0.3"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ GALLERY ═══════════════ -->
+<section id="gallery" class="sec dark" style="cursor:crosshair;">
+  <div class="sec-wrap">
+    <p class="sec-label josefin aos">Section VII — The Works</p>
+    <h2 class="sec-title aos">The Gallery</h2>
+    <div class="gal-grid">
+
+      <!-- 1. Pablo Picasso Portrait -->
+      <div class="gal-frame aos scale">
+        <img id="gal-picasso"
+             class="gal-img"
+             style="aspect-ratio:3/4;"
+             src="https://cdn.britannica.com/63/59963-050-C03F29B9/Pablo-Picasso.jpg"
+             alt="Pablo Picasso, c. 1908">
+        <div id="fb-gal-picasso" class="img-fallback" style="aspect-ratio:3/4;border:8px solid #2a2010;">
+          <span class="icon">◈</span><span>Pablo Picasso</span><span style="opacity:.5">Portrait, c. 1908</span>
+        </div>
+        <div class="gal-placard">
+          <p class="g-title">Pablo Picasso</p>
+          <p class="g-meta josefin">Unknown Photographer | c. 1908</p>
+          <p class="g-cap">A young outsider in Paris who dismantled five centuries of visual tradition and rebuilt it in his own image.</p>
+        </div>
+      </div>
+
+      <!-- 2. Les Demoiselles d'Avignon -->
+      <div class="gal-frame aos scale" style="transition-delay:.15s">
+        <img id="gal-demoiselles"
+             class="gal-img"
+             style="aspect-ratio:4/3;"
+             src="https://upload.wikimedia.org/wikipedia/en/4/4c/Les_Demoiselles_d%27Avignon.jpg"
+             alt="Les Demoiselles d'Avignon, 1907">
+        <div id="fb-gal-demoiselles" class="img-fallback" style="aspect-ratio:4/3;border:8px solid #2a2010;">
+          <span class="icon">◈</span><span>Les Demoiselles d'Avignon</span><span style="opacity:.5">1907 · MoMA</span>
+        </div>
+        <div class="gal-placard">
+          <p class="g-title"><em>Les Demoiselles d'Avignon</em></p>
+          <p class="g-meta josefin">1907 | Oil on canvas | MoMA, New York</p>
+          <p class="g-cap">Five figures, no single viewpoint, no idealised beauty. Picasso's most audacious act of informal deviance. Even Braque was horrified.</p>
+        </div>
+      </div>
+
+      <!-- 3. Guernica -->
+      <div class="gal-frame aos scale" style="transition-delay:.3s">
+        <img id="gal-guernica"
+             class="gal-img"
+             style="aspect-ratio:4/3;"
+             src="https://upload.wikimedia.org/wikipedia/en/7/74/PicassoGuernica.jpg"
+             alt="Guernica, 1937">
+        <div id="fb-gal-guernica" class="img-fallback" style="aspect-ratio:4/3;border:8px solid #2a2010;">
+          <span class="icon">◈</span><span>Guernica</span><span style="opacity:.5">1937 · Reina Sofía</span>
+        </div>
+        <div class="gal-placard">
+          <p class="g-title"><em>Guernica</em></p>
+          <p class="g-meta josefin">1937 | Oil on canvas | Museo Reina Sofía, Madrid</p>
+          <p class="g-cap">A response to the Nazi bombing of the Basque town of Guernica. Conflict Theory made monumental — art as weapon against power.</p>
+        </div>
+      </div>
+
+      <!-- 4. Girl Before a Mirror — spans full row -->
+      <div class="gal-frame aos scale" style="transition-delay:.45s;grid-column:1/-1;max-width:600px;width:100%;margin:0 auto;">
+        <img id="gal-mirror"
+             class="gal-img"
+             style="aspect-ratio:4/3;"
+             src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgGM4DgY5gKcChxTDt1ceVTKHh4U8ptc-8ZMWWyDx-fV9j0tCD7npnQjfy7FtHGYk9EKYLlBiNaA2s3M9-_ujBW6vgZ7AsfHa7pSiqMkxZjn_Tr-xFcB4bpc6zltqjaOvqGAspvsTH9KBWZ/s1600/1.jpg"
+             alt="Girl Before a Mirror, 1932">
+        <div id="fb-gal-mirror" class="img-fallback" style="aspect-ratio:4/3;border:8px solid #2a2010;">
+          <span class="icon">◈</span><span>Girl Before a Mirror</span><span style="opacity:.5">1932 · MoMA</span>
+        </div>
+        <div class="gal-placard">
+          <p class="g-title"><em>Girl Before a Mirror</em></p>
+          <p class="g-meta josefin">1932 | Oil on canvas | MoMA, New York</p>
+          <p class="g-cap">A single figure shown simultaneously as she appears, as she sees herself, and as she fears herself. Cubist fragmentation of identity prefigures sociology's interest in the multiplicity of the self.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider flip">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C150,5 300,35 450,18 C600,2 750,38 900,20 C1050,4 1150,30 1200,20 L1200,40 L0,40 Z" fill="#c8922a" opacity="0.4"/>
+    <path d="M0,25 C200,10 350,40 500,22 C650,6 800,35 950,18 C1100,3 1160,28 1200,22 L1200,40 L0,40 Z" fill="#1c3d6e" opacity="0.3"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ REFLECTION ═══════════════ -->
+<section id="reflection" class="sec" style="position:relative;overflow:hidden;">
+  <div class="ref-mark">"</div>
+  <div class="sec-wrap">
+    <p class="sec-label josefin aos" style="text-align:center;">Section VIII — Final Reflection</p>
+    <p class="ref-quote aos">"Every act of creation is first an act of destruction."</p>
+    <p class="ref-attr josefin aos">— Pablo Picasso</p>
+    <div class="ref-body">
+      <p class="aos">The Picasso case study teaches us something essential: <strong>the categories we use to police behaviour are not neutral.</strong> They are constructed by people with interests, maintained by institutions with power, and revised — sometimes revolutionised — by those courageous enough to violate them.</p>
+      <p class="aos">Within a generation, Picasso's deviance became the foundation of modern visual culture. The institutions that once excluded him scrambled to acquire, celebrate, and canonise his work. <strong>Deviance is not a permanent verdict — it is a temporary judgment, issued by people in a particular time and place.</strong></p>
+      <div class="wall-card aos">
+        <p>The figures history celebrates as geniuses — Galileo, Darwin, Einstein, Picasso — were in their own moment considered dangerous and deviant. The lesson is not that deviance is always good. It is that <strong>the capacity to imagine otherwise</strong> — to see the world not as it is but as it might be — is among the most powerful and necessary forces in human civilisation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C150,5 300,35 450,18 C600,2 750,38 900,20 C1050,4 1150,30 1200,20 L1200,40 L0,40 Z" fill="#c8922a" opacity="0.5"/>
+    <path d="M0,28 C200,12 400,40 600,22 C800,6 1000,38 1200,20 L1200,40 L0,40 Z" fill="#c8922a" opacity="0.25"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ REFERENCES ═══════════════ -->
+<section id="references" class="sec" style="background:var(--cream);">
+  <div class="sec-wrap">
+    <div class="ref-geo aos"><div class="rr rr1"></div><div class="rr rr2"></div><div class="rr rr3"></div></div>
+    <p class="sec-label josefin aos">Section IX</p>
+    <h2 class="sec-title aos">References</h2>
+    <span class="ref-ed josefin aos">APA 7th Edition</span>
+    <ul class="ref-list aos">
+      <li>Becker, H. S. (1963). <em>Outsiders: Studies in the sociology of deviance.</em> Free Press.</li>
+      <li>Chipp, H. B. (1968). <em>Theories of modern art: A source book by artists and critics.</em> University of California Press.</li>
+      <li>Encyclopædia Britannica. (2024). <em>Pablo Picasso.</em> Britannica. <a href="https://www.britannica.com/biography/Pablo-Picasso" target="_blank" rel="noopener">https://www.britannica.com/biography/Pablo-Picasso</a></li>
+      <li>Museum of Modern Art. (n.d.). <em>Pablo Picasso: Collection.</em> MoMA. <a href="https://www.moma.org/artists/4609" target="_blank" rel="noopener">https://www.moma.org/artists/4609</a></li>
+      <li>Richardson, J. (1991). <em>A life of Picasso, Volume I: 1881–1906.</em> Random House.</li>
+      <li>Tate. (n.d.). <em>Pablo Picasso: Style and technique.</em> Tate Modern. <a href="https://www.tate.org.uk/art/artists/pablo-picasso-1685/pablo-picasso-style-and-technique" target="_blank" rel="noopener">https://www.tate.org.uk/art/artists/pablo-picasso-1685/pablo-picasso-style-and-technique</a></li>
+      <li>Encyclopædia Britannica. (n.d.). <em>Pablo Picasso</em> [Photograph]. Britannica Image Quest. <a href="https://cdn.britannica.com/63/59963-050-C03F29B9/Pablo-Picasso.jpg" target="_blank" rel="noopener">https://cdn.britannica.com/63/59963-050-C03F29B9/Pablo-Picasso.jpg</a></li>
+      <li>Blogger/Google. (n.d.). <em>Girl before a mirror, Pablo Picasso, 1932</em> [Photograph of painting]. Retrieved from <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgGM4DgY5gKcChxTDt1ceVTKHh4U8ptc-8ZMWWyDx-fV9j0tCD7npnQjfy7FtHGYk9EKYLlBiNaA2s3M9-_ujBW6vgZ7AsfHa7pSiqMkxZjn_Tr-xFcB4bpc6zltqjaOvqGAspvsTH9KBWZ/s1600/1.jpg" target="_blank" rel="noopener">https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgGM4DgY5gKcChxTDt1ceVTKHh4U8ptc-8ZMWWyDx-fV9j0tCD7npnQjfy7FtHGYk9EKYLlBiNaA2s3M9-_ujBW6vgZ7AsfHa7pSiqMkxZjn_Tr-xFcB4bpc6zltqjaOvqGAspvsTH9KBWZ/s1600/1.jpg</a></li>
+      <li>Urbaki Art. (2023, January). <em>Pablo Picasso at work</em> [Photograph]. Urbaki Art. <a href="https://urbakiart.com/wp-content/uploads/2023/01/pablo-picasso-1-768x512.jpg" target="_blank" rel="noopener">https://urbakiart.com/wp-content/uploads/2023/01/pablo-picasso-1-768x512.jpg</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer style="background:var(--black);padding:var(--sp5) var(--sp6);text-align:center;border-top:1px solid rgba(200,146,42,.2);">
+  <p style="font-family:'Josefin Sans',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:.58rem;color:var(--grey);">
+    Picasso ∙ Deviance ∙ Society &nbsp;|&nbsp; Sociology Case Study &nbsp;|&nbsp; APA 7th Edition
+  </p>
+</footer>
+
+<script>
+// Intersection Observer for scroll animations
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.aos').forEach(el => obs.observe(el));
+
+// Hamburger menu
+const hbg = document.getElementById('hbg');
+const mob = document.getElementById('mobNav');
+document.getElementById('mobClose').addEventListener('click', () => mob.classList.remove('open'));
+hbg.addEventListener('click', () => mob.classList.toggle('open'));
+
+// Nav active state on scroll
+const secs = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  navAs.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--yellow)' : ''; });
+}, { passive: true });
+
+// Image fallback handler — shows placeholder div when image fails to load
+(function () {
+  const pairs = [
+    ['img-picasso',        'fb-picasso'],
+    ['gal-picasso',        'fb-gal-picasso'],
+    ['gal-demoiselles',    'fb-gal-demoiselles'],
+    ['gal-guernica',       'fb-gal-guernica'],
+    ['gal-mirror',         'fb-gal-mirror'],
+  ];
+  pairs.forEach(([imgId, fbId]) => {
+    const img = document.getElementById(imgId);
+    const fb  = document.getElementById(fbId);
+    if (!img || !fb) return;
+    img.addEventListener('error', () => {
+      img.style.display = 'none';
+      fb.style.display  = 'flex';
+    });
+  });
+})();
+</script>
+</body>
+</html>
